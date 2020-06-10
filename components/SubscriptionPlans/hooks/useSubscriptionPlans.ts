@@ -1,4 +1,4 @@
-interface Plan {
+export interface Plan {
   id: number
   numberOfPeople: number
   price: string
