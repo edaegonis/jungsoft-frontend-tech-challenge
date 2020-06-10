@@ -4,8 +4,16 @@ import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { withApollo } from "../../lib/apollo"
 
 function SubscriptionPlans() {
-  const { queryResult } = useSubscriptionPlans()
-  console.log(queryResult)
+  const { queryResult, getSelectedSubscriptionPlan } = useSubscriptionPlans()
+
+  const { data, error, loading } = queryResult
+
+  function renderSubscriptionPlanSelector() {
+    const { listPlans } = data
+
+    console.log(listPlans)
+    console.log(getSelectedSubscriptionPlan(listPlans))
+  }
 
   return (
     <div className="container">
@@ -13,6 +21,14 @@ function SubscriptionPlans() {
         <title>Woodspoon subscription plans that fit into your routine</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {loading ? (
+        <p>loading...</p>
+      ) : error ? (
+        <p>error</p>
+      ) : (
+        renderSubscriptionPlanSelector()
+      )}
     </div>
   )
 }
