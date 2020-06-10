@@ -5,7 +5,6 @@ import { withApollo } from "../../lib/apollo"
 
 function SubscriptionPlans() {
   const { queryResult } = useSubscriptionPlans()
-
   console.log(queryResult)
 
   return (

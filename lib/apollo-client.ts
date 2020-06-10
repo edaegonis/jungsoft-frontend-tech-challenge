@@ -1,9 +1,7 @@
 import { ApolloClient } from "apollo-client"
 import { InMemoryCache } from "apollo-cache-inmemory"
-import { HttpLink } from "apollo-link-http"
-
-import fetch from "unfetch"
 import { createHttpLink } from "apollo-link-http"
+import fetch from "cross-fetch"
 
 export default function createApolloClient(initialState, ctx) {
   // The `ctx` (NextPageContext) will only be present on the server.
