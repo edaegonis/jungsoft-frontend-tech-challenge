@@ -1,9 +1,23 @@
+import { useQuery } from "@apollo/react-hooks"
+import gql from "graphql-tag"
+
 export interface Plan {
   id: number
   numberOfPeople: number
   price: string
   weeklyRecipes: number
 }
+
+export const ALL_PLANS_QUERY = gql`
+  query {
+    listPlans {
+      id
+      weeklyRecipes
+      numberOfPeople
+      price
+    }
+  }
+`
 
 const plans: Plan[] = [
   {
@@ -57,7 +71,11 @@ const plans: Plan[] = [
 ]
 
 export function useSubscriptionPlans() {
+  const queryResult = useQuery(ALL_PLANS_QUERY, {
+    notifyOnNetworkStatusChange: true,
+  })
+
   return {
-    plans,
+    queryResult,
   }
 }

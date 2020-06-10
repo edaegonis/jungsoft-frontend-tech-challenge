@@ -1,3 +1,3 @@
-import { SubscriptionPlans } from "../components/SubscriptionPlans/SubscriptionPlans"
+import SubscriptionPlans from "../components/SubscriptionPlans/SubscriptionPlans"
 
 export default SubscriptionPlans
