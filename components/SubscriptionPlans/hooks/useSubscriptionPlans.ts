@@ -11,23 +11,28 @@ export interface Plan {
 }
 
 export function useSubscriptionPlans() {
-  const [selectedValues, setSelectedValues] = useState(false)
+  const [selectedPlanId, setSelectedPlanId] = useState<number | false>(false)
   const queryResult = useQuery(ALL_PLANS_QUERY, {
     notifyOnNetworkStatusChange: true,
   })
 
+  function setSelectedSubscriptionPlanId(id: number) {
+    setSelectedPlanId(id)
+  }
+
   function getSelectedSubscriptionPlan(plans: Plan[]) {
     /** If there is no selection, returns the first plan immediately */
-    if (!selectedValues) return plans[0]
+    if (!selectedPlanId) return plans[0]
 
-    const selected = plans[1]
+    const selected = plans.find(({ id }) => id === selectedPlanId)
 
     return selected
   }
 
   return {
     queryResult,
-    selectedValues,
+    selectedPlanId,
     getSelectedSubscriptionPlan,
+    setSelectedSubscriptionPlanId,
   }
 }
