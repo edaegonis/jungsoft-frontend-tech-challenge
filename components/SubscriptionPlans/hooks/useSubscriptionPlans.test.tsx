@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks"
+import { renderHook, act } from "@testing-library/react-hooks"
 import { MockedProvider } from "@apollo/react-testing"
 
 import { useSubscriptionPlans } from "./useSubscriptionPlans"
@@ -81,9 +81,7 @@ describe("useSubscriptionPlans", function () {
         wrapper,
       })
 
-      const { queryResult } = result.current
-
-      expect(queryResult.loading).toBeTruthy()
+      expect(result.current.queryResult.loading).toBeTruthy()
     })
   })
 
@@ -94,9 +92,7 @@ describe("useSubscriptionPlans", function () {
         wrapper,
       })
 
-      const { selectedPlanId } = result.current
-
-      expect(selectedPlanId).toBeFalsy()
+      expect(result.current.selectedPlanId).toBeFalsy()
     })
   })
 
@@ -144,7 +140,9 @@ describe("useSubscriptionPlans", function () {
       /**
        * When The current selected plan changes
        */
-      result.current.setSelectedSubscriptionPlanId(planToSelect.id)
+      act(() => {
+        result.current.setSelectedSubscriptionPlanId(planToSelect.id)
+      })
 
       const actualSelected = result.current.getSelectedSubscriptionPlan(
         result.current.queryResult.data.listPlans
