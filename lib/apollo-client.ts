@@ -10,7 +10,7 @@ export default function createApolloClient(initialState, ctx) {
   const link = createHttpLink({
     uri: "https://frontend-challenge.jungsoft.io/graphql",
     credentials: "same-origin",
-    fetch: fetch,
+    fetch,
   })
 
   return new ApolloClient({

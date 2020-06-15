@@ -1,4 +1,6 @@
+/** @jsx jsx */
 import Head from "next/head"
+import { jsx } from "theme-ui"
 
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { withApollo } from "../../lib/apollo"
@@ -11,8 +13,17 @@ function SubscriptionPlans() {
   function renderSubscriptionPlanSelector() {
     const { listPlans } = data
 
-    console.log(listPlans)
-    console.log(getSelectedSubscriptionPlan(listPlans))
+    return (
+      <p
+        sx={{
+          fontWeight: "bold",
+          fontSize: 4,
+          color: "background",
+        }}
+      >
+        initial theme
+      </p>
+    )
   }
 
   return (
