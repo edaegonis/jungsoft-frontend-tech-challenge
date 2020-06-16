@@ -14,3 +14,7 @@ export function getArePropertyValuesEqual(
 
   return arePropertiesEqual
 }
+
+export function getUniqueValuesFromArray(array) {
+  return [...new Set(array)]
+}
