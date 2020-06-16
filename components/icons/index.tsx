@@ -1,9 +1,11 @@
-export function ClockIcon() {
+/** @jsx jsx */
+import { jsx } from "theme-ui"
+
+export function ClockIcon({ size }) {
   return (
     <svg
+      sx={{ width: size }}
       xmlns="http://www.w3.org/2000/svg"
-      width="30.369"
-      height="30.158"
       viewBox="0 0 30.369 30.158"
     >
       <g transform="translate(0 -.001)">
@@ -62,12 +64,11 @@ export function ClockIcon() {
   )
 }
 
-export function KitchenToolsIcon() {
+export function KitchenToolsIcon({ size }) {
   return (
     <svg
+      sx={{ width: size }}
       xmlns="http://www.w3.org/2000/svg"
-      width="50.287"
-      height="48.568"
       viewBox="0 0 50.287 48.568"
     >
       <g transform="translate(0 -24.193)">
@@ -93,12 +94,11 @@ export function KitchenToolsIcon() {
   )
 }
 
-export function UserIcon() {
+export function UserIcon({ size }) {
   return (
     <svg
+      sx={{ width: size }}
       xmlns="http://www.w3.org/2000/svg"
-      width="38.1"
-      height="45.662"
       viewBox="0 0 38.1 45.662"
     >
       <g transform="translate(46.676 .498)">

@@ -5,9 +5,9 @@ const theme: Theme = {
     text: "#000",
     background: "#F5F8FA",
     primary: "#49AD33",
-    secondary: "#609",
-    test: "#f09",
-    bgdarker: "#F7F7F7",
+    secondary: "#61696F",
+    accent: "#49AD33",
+    highlight: "#F7F7F7",
   },
   fonts: {
     body:

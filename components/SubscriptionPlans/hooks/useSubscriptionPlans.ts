@@ -12,9 +12,7 @@ export interface Plan {
 
 export function useSubscriptionPlans() {
   const [selectedPlanId, setSelectedPlanId] = useState<number | false>(false)
-  const queryResult = useQuery(ALL_PLANS_QUERY, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const queryResult = useQuery(ALL_PLANS_QUERY)
 
   function setSelectedSubscriptionPlanId(id: number) {
     setSelectedPlanId(id)

@@ -46,7 +46,7 @@ function SubscriptionPlans() {
           </Styled.h2>
 
           <Box
-            bg="bgdarker"
+            bg="highlight"
             paddingY={"24px"}
             paddingX={"32px"}
             sx={{
@@ -60,8 +60,13 @@ function SubscriptionPlans() {
                 marginBottom: "28px",
               }}
             >
-              <UserIcon />
-              <span>Receita para quantas pessoas?</span>
+              <span sx={{ marginRight: "12px" }}>
+                <UserIcon size="32px" />
+              </span>
+              <span sx={{ color: "accent" }}>
+                Receita para <br />
+                quantas pessoas?
+              </span>
             </Flex>
 
             <Flex
@@ -99,8 +104,12 @@ function SubscriptionPlans() {
               }}
               bg="backgroundDarker"
             >
-              <KitchenToolsIcon />
-              <span>Quantas receitas por semana?</span>
+              <span sx={{ marginRight: "12px" }}>
+                <KitchenToolsIcon size="32px" />
+              </span>
+              <span sx={{ color: "accent" }}>
+                Quantas receitas <br /> por semana?
+              </span>
             </Flex>
 
             <Flex
