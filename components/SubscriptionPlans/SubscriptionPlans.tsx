@@ -5,10 +5,6 @@ import { Fragment } from "react"
 
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { UserIcon, KitchenToolsIcon } from "../icons"
-import {
-  getUniqueValuesFromArray,
-  getDoesPropertyValuesExistsInObject,
-} from "../../helpers/functional"
 
 function SubscriptionPlans() {
   const {
@@ -16,6 +12,8 @@ function SubscriptionPlans() {
     selectedParamValues,
     getSelectedSubscriptionPlan,
     handleSetParamValues,
+    getIsPlanValid,
+    getParamOptions,
   } = useSubscriptionPlans()
 
   const { data, error, loading } = queryResult
@@ -34,9 +32,7 @@ function SubscriptionPlans() {
             quantas pessoas?
           </span>
         ),
-        options: getUniqueValuesFromArray(
-          listPlans.map(({ numberOfPeople }) => numberOfPeople)
-        ),
+        options: getParamOptions(listPlans, "numberOfPeople"),
       },
       {
         name: "weeklyRecipes",
@@ -46,9 +42,7 @@ function SubscriptionPlans() {
             Quantas receitas <br /> por semana?
           </span>
         ),
-        options: getUniqueValuesFromArray(
-          listPlans.map(({ weeklyRecipes }) => weeklyRecipes)
-        ),
+        options: getParamOptions(listPlans, "weeklyRecipes"),
       },
     ]
 
@@ -89,11 +83,9 @@ function SubscriptionPlans() {
                  * so we can disable it if necessary
                  *
                  */
-                const isValid = listPlans.find((plan) => {
-                  return getDoesPropertyValuesExistsInObject(plan, {
-                    ...selectedParamValues,
-                    [name]: value,
-                  })
+                const isValid = getIsPlanValid(listPlans, {
+                  ...selectedParamValues,
+                  [name]: value,
                 })
 
                 return (

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/extend-expect"
-import { render, wait } from "@testing-library/react"
+import { render, waitFor } from "@testing-library/react"
 import React from "react"
 
 import SubscriptionPlans from "./SubscriptionPlans"
@@ -13,7 +13,7 @@ describe("SubscriptionPlans", function () {
       </MockedProviderWrapper>
     )
 
-    await wait(() => expect(getByTestId("plans")).toBeInTheDocument())
+    await waitFor(() => expect(getByTestId("plans")).toBeInTheDocument())
 
     getByTestId("plans")
   })

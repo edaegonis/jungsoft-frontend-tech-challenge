@@ -2,7 +2,10 @@ import { useQuery } from "@apollo/react-hooks"
 import { useState } from "react"
 
 import { ALL_PLANS_QUERY } from "../../../queries/subscription-plans"
-import { getDoesPropertyValuesExistsInObject } from "../../../helpers/functional"
+import {
+  getDoesPropertyValuesExistsInObject,
+  getUniqueValuesFromArray,
+} from "../../../helpers/functional"
 
 export interface Plan {
   [key: string]: number | string
@@ -39,10 +42,24 @@ export function useSubscriptionPlans() {
     }))
   }
 
+  function getIsPlanValid(plans: Plan[], selectedParams: Record<string, any>) {
+    return plans.find((plan) => {
+      return getDoesPropertyValuesExistsInObject(plan, {
+        ...selectedParams,
+      })
+    })
+  }
+
+  function getParamOptions(plans: [], paramName: string) {
+    return getUniqueValuesFromArray(plans.map((plan) => plan[paramName]) as any)
+  }
+
   return {
     queryResult,
     selectedParamValues,
     handleSetParamValues,
     getSelectedSubscriptionPlan,
+    getIsPlanValid,
+    getParamOptions,
   }
 }
