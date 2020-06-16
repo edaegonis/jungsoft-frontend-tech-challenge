@@ -1,14 +1,17 @@
-export default {
+import { Theme } from "theme-ui"
+
+const theme: Theme = {
   colors: {
-    text: "#f09",
+    text: "#000",
     background: "#F5F8FA",
-    primary: "#07c",
+    primary: "#49AD33",
     secondary: "#609",
+    test: "#f09",
+    bgdarker: "#F7F7F7",
   },
   fonts: {
     body:
       'Rubik, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    heading: "inherit",
   },
   styles: {
     root: {
@@ -17,8 +20,16 @@ export default {
       bg: "background",
     },
     h1: {
-      fontSize: [4, 5, 6],
-      color: "primary",
+      fontSize: 30,
+      color: "text",
+      marginBottom: 18,
+      textAlign: "center",
+    },
+    h2: {
+      fontSize: 24,
+      color: "text",
+      marginBottom: 18,
+      textAlign: "center",
     },
     a: {
       color: "primary",
@@ -28,5 +39,10 @@ export default {
         textDecoration: "underline",
       },
     },
+    img: {
+      maxWidth: "100%",
+    },
   },
 }
+
+export default theme
