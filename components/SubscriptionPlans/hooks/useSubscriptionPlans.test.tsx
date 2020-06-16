@@ -85,17 +85,6 @@ describe("useSubscriptionPlans", function () {
     })
   })
 
-  /** Test for primitive value */
-  describe("selectedPlanId", function () {
-    it("should default to false", async () => {
-      const { result } = renderHook(() => useSubscriptionPlans(), {
-        wrapper,
-      })
-
-      expect(result.current.selectedPlanId).toBeFalsy()
-    })
-  })
-
   /** Feature: Read a selected subscription plan */
   describe("getSelectedSubscriptionPlan", function () {
     it("should return the first plan if there is no selection", async () => {
@@ -141,7 +130,16 @@ describe("useSubscriptionPlans", function () {
        * When The current selected plan changes
        */
       act(() => {
-        result.current.setSelectedSubscriptionPlanId(planToSelect.id)
+        Object.keys(planToSelect).map((key) => {
+          result.current.handleSetParamValues({
+            target: {
+              dataset: {
+                name: key,
+                value: planToSelect[key],
+              },
+            },
+          })
+        })
       })
 
       const actualSelected = result.current.getSelectedSubscriptionPlan(
