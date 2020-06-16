@@ -31,7 +31,7 @@ function SubscriptionPlans() {
         </Styled.h1>
       </Box>
 
-      <Box bg="white">
+      <Box bg="white" paddingBottom="24px">
         <Styled.img
           sx={{
             borderTopRightRadius: "10px",
@@ -48,6 +48,7 @@ function SubscriptionPlans() {
           <Box
             bg="bgdarker"
             paddingY={"24px"}
+            paddingX={"32px"}
             sx={{
               borderRadius: "10px",
             }}
@@ -55,15 +56,19 @@ function SubscriptionPlans() {
             <Flex
               sx={{
                 justifyContent: "center",
+                alignItems: "center",
+                marginBottom: "28px",
               }}
             >
               <UserIcon />
-              <Styled.p>Receita para quantas pessoas?</Styled.p>
+              <span>Receita para quantas pessoas?</span>
             </Flex>
 
             <Flex
               sx={{
                 justifyContent: "center",
+                alignItems: "center",
+                marginBottom: "32px",
               }}
             >
               <Box
@@ -89,16 +94,19 @@ function SubscriptionPlans() {
             <Flex
               sx={{
                 justifyContent: "center",
+                alignItems: "center",
+                marginBottom: "28px",
               }}
               bg="backgroundDarker"
             >
               <KitchenToolsIcon />
-              <Styled.p>Quantas receitas por semana?</Styled.p>
+              <span>Quantas receitas por semana?</span>
             </Flex>
 
             <Flex
               sx={{
                 justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <Box
