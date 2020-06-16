@@ -80,19 +80,21 @@ function SubscriptionPlans() {
                 sx={{
                   borderRadius: "10px",
                 }}
-                padding={16}
+                paddingY={"12px"}
+                paddingX={"20px"}
                 bg="primary"
                 color="#fff"
               >
-                2
+                <span sx={{ fontSize: "28px" }}>2</span>
               </Box>
               <Box
                 sx={{
                   borderRadius: "10px",
                 }}
-                padding={16}
+                paddingY={"12px"}
+                paddingX={"20px"}
               >
-                4
+                <span sx={{ fontSize: "28px" }}>2</span>
               </Box>
             </Flex>
 
@@ -122,27 +124,31 @@ function SubscriptionPlans() {
                 sx={{
                   borderRadius: "10px",
                 }}
-                padding={16}
+                paddingY={"12px"}
+                paddingX={"20px"}
               >
-                1
+                <span sx={{ fontSize: "28px" }}>2</span>
               </Box>
               <Box
                 sx={{
                   borderRadius: "10px",
                 }}
-                padding={16}
+                paddingY={"12px"}
+                paddingX={"20px"}
                 bg="primary"
                 color="#fff"
               >
-                2
+                <span sx={{ fontSize: "28px" }}>2</span>
               </Box>
               <Box
                 sx={{
                   borderRadius: "10px",
                 }}
-                padding={16}
+                bg="white"
+                paddingY={"12px"}
+                paddingX={"20px"}
               >
-                4
+                <span sx={{ fontSize: "28px" }}>2</span>
               </Box>
             </Flex>
           </Box>
