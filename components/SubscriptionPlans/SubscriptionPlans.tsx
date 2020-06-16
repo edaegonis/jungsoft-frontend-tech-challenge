@@ -4,7 +4,6 @@ import { jsx, Styled, Flex, Box } from "theme-ui"
 import { Fragment } from "react"
 
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
-import { withApollo } from "../../lib/apollo"
 import { UserIcon, KitchenToolsIcon } from "../icons"
 import {
   getUniqueValuesFromArray,
@@ -158,7 +157,7 @@ function SubscriptionPlans() {
           ) : error ? (
             <p>error</p>
           ) : (
-            renderSubscriptionPlanSelector()
+            <div data-testid="plans">{renderSubscriptionPlanSelector()}</div>
           )}
         </Box>
       </Box>
@@ -166,4 +165,4 @@ function SubscriptionPlans() {
   )
 }
 
-export default withApollo({ ssr: true })(SubscriptionPlans)
+export default SubscriptionPlans
