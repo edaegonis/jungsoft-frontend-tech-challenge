@@ -7,12 +7,115 @@ import { withApollo } from "../../lib/apollo"
 import { UserIcon, KitchenToolsIcon } from "../icons"
 
 function SubscriptionPlans() {
-  const { queryResult } = useSubscriptionPlans()
+  const {
+    queryResult,
+    getSelectedSubscriptionPlan,
+    handleSetParamValues,
+  } = useSubscriptionPlans()
 
-  const { error, loading } = queryResult
+  const { data, error, loading } = queryResult
 
   function renderSubscriptionPlanSelector() {
-    return null
+    const { listPlans } = data
+
+    if (!listPlans || !listPlans.length) {
+      return <p>Nenhum plano encontrado</p>
+    }
+
+    const selected = getSelectedSubscriptionPlan(listPlans)
+
+    const availableNumberOfPeople = [2, 4]
+    const availableWeeklyRecipes = [1, 2, 4]
+
+    console.log(selected)
+    return (
+      <Box
+        bg="highlight"
+        paddingY={"24px"}
+        paddingX={"32px"}
+        sx={{
+          borderRadius: "10px",
+        }}
+      >
+        <Flex
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "28px",
+          }}
+        >
+          <span sx={{ marginRight: "12px" }}>
+            <UserIcon size="32px" />
+          </span>
+          <span sx={{ color: "accent" }}>
+            Receita para <br />
+            quantas pessoas?
+          </span>
+        </Flex>
+
+        <Flex
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "32px",
+          }}
+        >
+          {availableNumberOfPeople.map((value) => (
+            <Box
+              key={value}
+              sx={{
+                borderRadius: "10px",
+              }}
+              paddingY={"12px"}
+              paddingX={"20px"}
+              bg="primary"
+              color="white"
+              data-name="numberOfPeople"
+              data-value={value}
+              onClick={handleSetParamValues}
+            >
+              <span sx={{ fontSize: "28px" }}>{value}</span>
+            </Box>
+          ))}
+        </Flex>
+
+        <Flex
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "28px",
+          }}
+          bg="highlight"
+        >
+          <span sx={{ marginRight: "12px" }}>
+            <KitchenToolsIcon size="32px" />
+          </span>
+          <span sx={{ color: "accent" }}>
+            Quantas receitas <br /> por semana?
+          </span>
+        </Flex>
+
+        <Flex
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {availableWeeklyRecipes.map((value) => (
+            <Box
+              key={value}
+              sx={{
+                borderRadius: "10px",
+              }}
+              paddingY={"12px"}
+              paddingX={"20px"}
+            >
+              <span sx={{ fontSize: "28px" }}>{value}</span>
+            </Box>
+          ))}
+        </Flex>
+      </Box>
+    )
   }
 
   return (
@@ -45,123 +148,15 @@ function SubscriptionPlans() {
             Gostou e ainda não é assinante? <br /> Escolha já um plano semanal!
           </Styled.h2>
 
-          <Box
-            bg="highlight"
-            paddingY={"24px"}
-            paddingX={"32px"}
-            sx={{
-              borderRadius: "10px",
-            }}
-          >
-            <Flex
-              sx={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "28px",
-              }}
-            >
-              <span sx={{ marginRight: "12px" }}>
-                <UserIcon size="32px" />
-              </span>
-              <span sx={{ color: "accent" }}>
-                Receita para <br />
-                quantas pessoas?
-              </span>
-            </Flex>
-
-            <Flex
-              sx={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "32px",
-              }}
-            >
-              <Box
-                sx={{
-                  borderRadius: "10px",
-                }}
-                paddingY={"12px"}
-                paddingX={"20px"}
-                bg="primary"
-                color="#fff"
-              >
-                <span sx={{ fontSize: "28px" }}>2</span>
-              </Box>
-              <Box
-                sx={{
-                  borderRadius: "10px",
-                }}
-                paddingY={"12px"}
-                paddingX={"20px"}
-              >
-                <span sx={{ fontSize: "28px" }}>2</span>
-              </Box>
-            </Flex>
-
-            <Flex
-              sx={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "28px",
-              }}
-              bg="backgroundDarker"
-            >
-              <span sx={{ marginRight: "12px" }}>
-                <KitchenToolsIcon size="32px" />
-              </span>
-              <span sx={{ color: "accent" }}>
-                Quantas receitas <br /> por semana?
-              </span>
-            </Flex>
-
-            <Flex
-              sx={{
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  borderRadius: "10px",
-                }}
-                paddingY={"12px"}
-                paddingX={"20px"}
-              >
-                <span sx={{ fontSize: "28px" }}>2</span>
-              </Box>
-              <Box
-                sx={{
-                  borderRadius: "10px",
-                }}
-                paddingY={"12px"}
-                paddingX={"20px"}
-                bg="primary"
-                color="#fff"
-              >
-                <span sx={{ fontSize: "28px" }}>2</span>
-              </Box>
-              <Box
-                sx={{
-                  borderRadius: "10px",
-                }}
-                bg="white"
-                paddingY={"12px"}
-                paddingX={"20px"}
-              >
-                <span sx={{ fontSize: "28px" }}>2</span>
-              </Box>
-            </Flex>
-          </Box>
+          {loading ? (
+            <p>loading...</p>
+          ) : error ? (
+            <p>error</p>
+          ) : (
+            renderSubscriptionPlanSelector()
+          )}
         </Box>
       </Box>
-
-      {loading ? (
-        <p>loading...</p>
-      ) : error ? (
-        <p>error</p>
-      ) : (
-        renderSubscriptionPlanSelector()
-      )}
     </Box>
   )
 }

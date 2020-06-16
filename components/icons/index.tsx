@@ -4,7 +4,7 @@ import { jsx } from "theme-ui"
 export function ClockIcon({ size }) {
   return (
     <svg
-      sx={{ width: size }}
+      sx={{ width: size, verticalAlign: "middle" }}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 30.369 30.158"
     >
@@ -67,7 +67,7 @@ export function ClockIcon({ size }) {
 export function KitchenToolsIcon({ size }) {
   return (
     <svg
-      sx={{ width: size }}
+      sx={{ width: size, verticalAlign: "middle" }}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50.287 48.568"
     >
@@ -97,7 +97,7 @@ export function KitchenToolsIcon({ size }) {
 export function UserIcon({ size }) {
   return (
     <svg
-      sx={{ width: size }}
+      sx={{ width: size, verticalAlign: "middle" }}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 38.1 45.662"
     >
