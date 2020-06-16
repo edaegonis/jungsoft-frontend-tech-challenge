@@ -6,11 +6,15 @@ import { Fragment } from "react"
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { withApollo } from "../../lib/apollo"
 import { UserIcon, KitchenToolsIcon } from "../icons"
-import { getUniqueValuesFromArray } from "../../helpers/functional"
+import {
+  getUniqueValuesFromArray,
+  getDoesPropertyValuesExistsInObject,
+} from "../../helpers/functional"
 
 function SubscriptionPlans() {
   const {
     queryResult,
+    selectedParamValues,
     getSelectedSubscriptionPlan,
     handleSetParamValues,
   } = useSubscriptionPlans()
@@ -19,10 +23,7 @@ function SubscriptionPlans() {
 
   function renderSubscriptionPlanSelector() {
     const { listPlans } = data
-
-    if (!listPlans || !listPlans.length) {
-      return <p>Nenhum plano foi encontrado. Por favor, tente novamente</p>
-    }
+    const selected = getSelectedSubscriptionPlan(listPlans)
 
     const paramsToChoose = [
       {
@@ -34,7 +35,7 @@ function SubscriptionPlans() {
             quantas pessoas?
           </span>
         ),
-        values: getUniqueValuesFromArray(
+        options: getUniqueValuesFromArray(
           listPlans.map(({ numberOfPeople }) => numberOfPeople)
         ),
       },
@@ -46,7 +47,7 @@ function SubscriptionPlans() {
             Quantas receitas <br /> por semana?
           </span>
         ),
-        values: getUniqueValuesFromArray(
+        options: getUniqueValuesFromArray(
           listPlans.map(({ weeklyRecipes }) => weeklyRecipes)
         ),
       },
@@ -61,7 +62,7 @@ function SubscriptionPlans() {
           borderRadius: "10px",
         }}
       >
-        {paramsToChoose.map(({ name, icon, text, values }) => (
+        {paramsToChoose.map(({ name, icon, text, options }) => (
           <Fragment key={name}>
             <Flex
               key={name}
@@ -81,23 +82,40 @@ function SubscriptionPlans() {
                 marginBottom: "32px",
               }}
             >
-              {values.map((value) => (
-                <Box
-                  key={name + value}
-                  sx={{
-                    borderRadius: "10px",
-                  }}
-                  paddingY={"12px"}
-                  paddingX={"20px"}
-                  bg="primary"
-                  color="white"
-                  data-name={name}
-                  data-value={value}
-                  onClick={handleSetParamValues}
-                >
-                  <span sx={{ fontSize: "28px" }}>{value}</span>
-                </Box>
-              ))}
+              {options.map((value) => {
+                const isSelected = selected && selected[name] === value
+
+                /**
+                 * Check if the current parameter would be valid if selected
+                 * so we can disable it if necessary
+                 *
+                 */
+                const isValid = listPlans.find((plan) => {
+                  return getDoesPropertyValuesExistsInObject(plan, {
+                    ...selectedParamValues,
+                    [name]: value,
+                  })
+                })
+
+                return (
+                  <Box
+                    key={name + value}
+                    sx={{
+                      borderRadius: "10px",
+                      opacity: isValid ? "1" : "0.4",
+                    }}
+                    paddingY={"12px"}
+                    paddingX={"20px"}
+                    bg={isSelected ? "primary" : isValid ? "white" : "#fafafa"}
+                    color={isSelected ? "white" : "#AEB2B8"}
+                    data-name={name}
+                    data-value={value}
+                    onClick={isValid ? handleSetParamValues : null}
+                  >
+                    <span sx={{ fontSize: "28px" }}>{value}</span>
+                  </Box>
+                )
+              })}
             </Flex>
           </Fragment>
         ))}

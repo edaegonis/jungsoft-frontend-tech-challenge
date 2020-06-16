@@ -1,20 +1,23 @@
-export function getArePropertyValuesEqual(
-  object: Record<string, unknown>,
-  propertyValues: Record<string, unknown>
+/** Checks if given property values does exists in an object */
+export function getDoesPropertyValuesExistsInObject(
+  object: Record<string, any>,
+  propertyValues: Record<string, any>
 ) {
-  let arePropertiesEqual = true
-
+  let doesAllPropertyValuesExist = true
   const keys = Object.keys(propertyValues)
 
   keys.map((key) => {
-    if (object[key] !== propertyValues[key]) {
-      arePropertiesEqual = false
+    if (
+      object[key] &&
+      parseInt(object[key]) !== parseInt(propertyValues[key])
+    ) {
+      doesAllPropertyValuesExist = false
     }
   })
 
-  return arePropertiesEqual
+  return doesAllPropertyValuesExist
 }
 
-export function getUniqueValuesFromArray(array) {
+export function getUniqueValuesFromArray(array: []) {
   return [...new Set(array)]
 }

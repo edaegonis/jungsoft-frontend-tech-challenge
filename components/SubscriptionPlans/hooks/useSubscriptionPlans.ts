@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks"
 import { useState } from "react"
 
 import { ALL_PLANS_QUERY } from "../../../queries/subscription-plans"
-import { getArePropertyValuesEqual } from "../../../helpers/functional"
+import { getDoesPropertyValuesExistsInObject } from "../../../helpers/functional"
 
 export interface Plan {
   [key: string]: number | string
@@ -23,7 +23,7 @@ export function useSubscriptionPlans() {
     if (!keys.length) return plans[0]
 
     const selected = plans.find((plan) => {
-      return getArePropertyValuesEqual(plan, selectedParamValues)
+      return getDoesPropertyValuesExistsInObject(plan, selectedParamValues)
     })
 
     return selected
