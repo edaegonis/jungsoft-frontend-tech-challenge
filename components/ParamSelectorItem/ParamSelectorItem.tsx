@@ -1,20 +1,23 @@
 /** @jsx jsx */
-import { jsx, Flex, Box } from "theme-ui"
+import { jsx, Flex, Box, Grid } from "theme-ui"
 
-import { useSubscriptionPlans } from "../SubscriptionPlans/hooks/useSubscriptionPlans"
-
-function ParamSelectorItem({ param, plans, selectedPlan }) {
-  const {
-    selectedParamValues,
-    handleSetParamValues,
-    getIsPlanValid,
-  } = useSubscriptionPlans()
+function ParamSelectorItem({
+  param,
+  plans,
+  selectedPlan,
+  selectedParamValues,
+  handleSetParamValues,
+  getIsPlanValid,
+}) {
   const { name, icon, text, options } = param
 
   return (
     <Flex
       sx={{
         flexDirection: ["column"],
+        "&:not(:last-child)": {
+          marginRight: [null, null, "120px"],
+        },
       }}
     >
       <Flex
@@ -27,8 +30,9 @@ function ParamSelectorItem({ param, plans, selectedPlan }) {
         <span sx={{ marginRight: "12px" }}>{icon}</span>
         <span sx={{ color: "accent" }}>{text}</span>
       </Flex>
-      <Flex
+      <Grid
         sx={{
+          gridTemplate: "auto / auto auto auto",
           justifyContent: "center",
           alignItems: "center",
           marginBottom: "32px",
@@ -53,6 +57,7 @@ function ParamSelectorItem({ param, plans, selectedPlan }) {
               sx={{
                 borderRadius: "10px",
                 opacity: isValid ? "1" : "0.4",
+                cursor: "pointer",
               }}
               paddingY={"12px"}
               paddingX={"20px"}
@@ -66,7 +71,7 @@ function ParamSelectorItem({ param, plans, selectedPlan }) {
             </Box>
           )
         })}
-      </Flex>
+      </Grid>
     </Flex>
   )
 }

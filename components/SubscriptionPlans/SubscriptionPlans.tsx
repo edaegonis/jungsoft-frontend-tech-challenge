@@ -11,6 +11,9 @@ function SubscriptionPlans() {
     queryResult,
     getSelectedSubscriptionPlan,
     getParamOptions,
+    selectedParamValues,
+    handleSetParamValues,
+    getIsPlanValid,
   } = useSubscriptionPlans()
 
   const { data, error, loading } = queryResult
@@ -43,6 +46,14 @@ function SubscriptionPlans() {
       },
     ]
 
+    const paramSelectorProps = {
+      plans: listPlans,
+      selectedPlan: selected,
+      selectedParamValues,
+      handleSetParamValues,
+      getIsPlanValid,
+    }
+
     return (
       <Flex
         bg="highlight"
@@ -57,8 +68,7 @@ function SubscriptionPlans() {
           <ParamSelectorItem
             key={param.name}
             param={param}
-            plans={listPlans}
-            selectedPlan={selected}
+            {...paramSelectorProps}
           />
         ))}
       </Flex>
@@ -90,7 +100,7 @@ function SubscriptionPlans() {
       >
         <Styled.img
           sx={{
-            borderTopRightRadius: "10px",
+            borderTopRightRadius: ["10px", "10px", "0px"],
             borderTopLeftRadius: "10px",
           }}
           src="/images/bg1.jpg"
