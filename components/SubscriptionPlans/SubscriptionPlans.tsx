@@ -1,18 +1,15 @@
 /** @jsx jsx */
 import Head from "next/head"
-import { jsx, Styled, Flex, Box } from "theme-ui"
-import { Fragment } from "react"
+import { jsx, Styled, Box } from "theme-ui"
 
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { UserIcon, KitchenToolsIcon } from "../icons"
+import ParamSelector from "../ParamSelector/ParamSelector"
 
 function SubscriptionPlans() {
   const {
     queryResult,
-    selectedParamValues,
     getSelectedSubscriptionPlan,
-    handleSetParamValues,
-    getIsPlanValid,
     getParamOptions,
   } = useSubscriptionPlans()
 
@@ -55,60 +52,13 @@ function SubscriptionPlans() {
           borderRadius: "10px",
         }}
       >
-        {paramsToChoose.map(({ name, icon, text, options }) => (
-          <Fragment key={name}>
-            <Flex
-              key={name}
-              sx={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "28px",
-              }}
-            >
-              <span sx={{ marginRight: "12px" }}>{icon}</span>
-              <span sx={{ color: "accent" }}>{text}</span>
-            </Flex>
-            <Flex
-              sx={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "32px",
-              }}
-            >
-              {options.map((value) => {
-                const isSelected = selected && selected[name] === value
-
-                /**
-                 * Check if the current parameter would be valid if selected
-                 * so we can disable it if necessary
-                 *
-                 */
-                const isValid = getIsPlanValid(listPlans, {
-                  ...selectedParamValues,
-                  [name]: value,
-                })
-
-                return (
-                  <Box
-                    key={name + value}
-                    sx={{
-                      borderRadius: "10px",
-                      opacity: isValid ? "1" : "0.4",
-                    }}
-                    paddingY={"12px"}
-                    paddingX={"20px"}
-                    bg={isSelected ? "primary" : isValid ? "white" : "#fafafa"}
-                    color={isSelected ? "white" : "#AEB2B8"}
-                    data-name={name}
-                    data-value={value}
-                    onClick={isValid ? handleSetParamValues : null}
-                  >
-                    <span sx={{ fontSize: "28px" }}>{value}</span>
-                  </Box>
-                )
-              })}
-            </Flex>
-          </Fragment>
+        {paramsToChoose.map((param) => (
+          <ParamSelector
+            key={param.name}
+            param={param}
+            plans={listPlans}
+            selectedPlan={selected}
+          />
         ))}
       </Box>
     )
