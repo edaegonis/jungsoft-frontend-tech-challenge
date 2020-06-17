@@ -20,6 +20,9 @@ const theme: Theme = {
       textAlign: "center",
     },
   },
+  sizes: {
+    container: "1180px",
+  },
   styles: {
     root: {
       fontFamily: "body",

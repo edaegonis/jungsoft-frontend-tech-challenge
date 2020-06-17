@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import Head from "next/head"
-import { jsx, Styled, Box, Flex } from "theme-ui"
+import { jsx, Styled, Box, Flex, Container } from "theme-ui"
 
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { UserIcon, KitchenToolsIcon } from "../icons"
@@ -76,7 +76,7 @@ function SubscriptionPlans() {
   }
 
   return (
-    <Box p={[3]}>
+    <Container p={[3]}>
       <Head>
         <title>Woodspoon subscription plans that fit into your routine</title>
         <link rel="icon" href="/favicon.ico" />
@@ -84,29 +84,40 @@ function SubscriptionPlans() {
 
       <Box p={2}>
         <Styled.h1>
-          Configure o plano que{" "}
-          <b>
-            melhor encaixa na <br /> sua rotina
-          </b>
+          Configure o plano que <br />
+          <b>melhor encaixa na sua rotina</b>
         </Styled.h1>
       </Box>
 
       <Flex
         bg="white"
-        paddingBottom="24px"
         sx={{
           flexDirection: ["column", "column", "row"],
+          paddingBottom: ["24px", "24px", "0"],
         }}
       >
-        <Styled.img
+        <Box
           sx={{
+            flex: "1 30%",
+            backgroundImage: "url('/images/bg1.jpg')",
+            minHeight: ["260px", "260px", null],
+            backgroundPosition: "center",
+            backgroundSize: "cover",
             borderTopRightRadius: ["10px", "10px", "0px"],
             borderTopLeftRadius: "10px",
           }}
-          src="/images/bg1.jpg"
-        />
+        ></Box>
 
-        <Box marginY={32} paddingX={"16px"}>
+        <Flex
+          marginY={32}
+          paddingX={"16px"}
+          sx={{
+            flex: "1 70%",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Styled.h2>
             Gostou e ainda não é assinante? <br /> Escolha já um plano semanal!
           </Styled.h2>
@@ -118,9 +129,9 @@ function SubscriptionPlans() {
           ) : (
             <div data-testid="plans">{renderSubscriptionPlanSelector()}</div>
           )}
-        </Box>
+        </Flex>
       </Flex>
-    </Box>
+    </Container>
   )
 }
 

@@ -67,7 +67,9 @@ function ParamSelectorItem({
               data-value={value}
               onClick={isValid ? handleSetParamValues : null}
             >
-              <span sx={{ fontSize: "28px" }}>{value}</span>
+              <span sx={{ fontSize: "28px", pointerEvents: "none" }}>
+                {value}
+              </span>
             </Box>
           )
         })}
