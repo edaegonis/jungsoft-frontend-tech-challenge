@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import Head from "next/head"
-import { jsx, Styled, Box } from "theme-ui"
+import { jsx, Styled, Box, Flex } from "theme-ui"
 
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { UserIcon, KitchenToolsIcon } from "../icons"
-import ParamSelector from "../ParamSelector/ParamSelector"
+import ParamSelectorItem from "../ParamSelectorItem/ParamSelectorItem"
 
 function SubscriptionPlans() {
   const {
@@ -44,23 +44,24 @@ function SubscriptionPlans() {
     ]
 
     return (
-      <Box
+      <Flex
         bg="highlight"
         paddingY={"24px"}
         paddingX={"32px"}
         sx={{
+          flexDirection: ["column", "column", "row"],
           borderRadius: "10px",
         }}
       >
         {paramsToChoose.map((param) => (
-          <ParamSelector
+          <ParamSelectorItem
             key={param.name}
             param={param}
             plans={listPlans}
             selectedPlan={selected}
           />
         ))}
-      </Box>
+      </Flex>
     )
   }
 
@@ -80,7 +81,13 @@ function SubscriptionPlans() {
         </Styled.h1>
       </Box>
 
-      <Box bg="white" paddingBottom="24px">
+      <Flex
+        bg="white"
+        paddingBottom="24px"
+        sx={{
+          flexDirection: ["column", "column", "row"],
+        }}
+      >
         <Styled.img
           sx={{
             borderTopRightRadius: "10px",
@@ -102,7 +109,7 @@ function SubscriptionPlans() {
             <div data-testid="plans">{renderSubscriptionPlanSelector()}</div>
           )}
         </Box>
-      </Box>
+      </Flex>
     </Box>
   )
 }

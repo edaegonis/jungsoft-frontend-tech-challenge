@@ -1,9 +1,9 @@
-import React from "react"
-import { Flex, Box } from "theme-ui"
+/** @jsx jsx */
+import { jsx, Flex, Box } from "theme-ui"
 
 import { useSubscriptionPlans } from "../SubscriptionPlans/hooks/useSubscriptionPlans"
 
-function ParamSelector({ param, plans, selectedPlan }) {
+function ParamSelectorItem({ param, plans, selectedPlan }) {
   const {
     selectedParamValues,
     handleSetParamValues,
@@ -12,9 +12,12 @@ function ParamSelector({ param, plans, selectedPlan }) {
   const { name, icon, text, options } = param
 
   return (
-    <Flex key={name}>
+    <Flex
+      sx={{
+        flexDirection: ["column"],
+      }}
+    >
       <Flex
-        key={name}
         sx={{
           justifyContent: "center",
           alignItems: "center",
@@ -68,4 +71,4 @@ function ParamSelector({ param, plans, selectedPlan }) {
   )
 }
 
-export default ParamSelector
+export default ParamSelectorItem
