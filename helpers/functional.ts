@@ -1,3 +1,6 @@
+/** User won't select these keys so we ignore it */
+const keysToIgnore = ["id", "price", "__typename"]
+
 /** Checks if given property values does exists in an object */
 export function getDoesPropertyValuesExistsInObject(
   object: Record<string, any>,
@@ -9,6 +12,7 @@ export function getDoesPropertyValuesExistsInObject(
   keys.map((key) => {
     if (
       object[key] &&
+      keysToIgnore.indexOf(key) === -1 &&
       parseInt(object[key]) !== parseInt(propertyValues[key])
     ) {
       doesAllPropertyValuesExist = false

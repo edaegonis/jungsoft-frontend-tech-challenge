@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { ALL_PLANS_QUERY } from "../../../queries/subscription-plans"
 import {
@@ -18,6 +18,25 @@ export interface Plan {
 export function useSubscriptionPlans() {
   const [selectedParamValues, setSelectedParamValues] = useState({})
   const queryResult = useQuery(ALL_PLANS_QUERY)
+
+  /** Select the first plan on component mounting */
+  useEffect(() => {
+    if (queryResult.data) {
+      /** Select the immediate first plan */
+      const planToSelect = queryResult.data.listPlans[0]
+
+      Object.keys(planToSelect).map((key) => {
+        handleSetParamValues({
+          target: {
+            dataset: {
+              name: key,
+              value: planToSelect[key],
+            },
+          },
+        })
+      })
+    }
+  }, [queryResult])
 
   function getSelectedSubscriptionPlan(plans: Plan[]) {
     const keys = Object.keys(selectedParamValues)

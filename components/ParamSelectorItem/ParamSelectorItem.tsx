@@ -35,7 +35,7 @@ function ParamSelectorItem({
           gridTemplate: "auto / auto auto auto",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "32px",
+          marginBottom: ["32px", "32px", "0"],
         }}
       >
         {options.map((value) => {
