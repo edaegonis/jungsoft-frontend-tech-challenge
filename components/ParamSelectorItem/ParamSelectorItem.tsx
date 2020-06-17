@@ -58,6 +58,7 @@ function ParamSelectorItem({
                 borderRadius: "10px",
                 opacity: isValid ? "1" : "0.4",
                 cursor: "pointer",
+                transition: "all .4s linear",
               }}
               paddingY={"12px"}
               paddingX={"20px"}

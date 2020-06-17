@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import Head from "next/head"
 import { jsx, Styled, Box, Flex, Container } from "theme-ui"
+import { Fragment } from "react"
 
 import { useSubscriptionPlans } from "./hooks/useSubscriptionPlans"
 import { UserIcon, KitchenToolsIcon } from "../icons"
@@ -21,6 +22,7 @@ function SubscriptionPlans() {
   function renderSubscriptionPlanSelector() {
     const { listPlans } = data
     const selected = getSelectedSubscriptionPlan(listPlans)
+    const { price } = selected
 
     const paramsToChoose = [
       {
@@ -53,25 +55,64 @@ function SubscriptionPlans() {
       handleSetParamValues,
       getIsPlanValid,
     }
-
     return (
-      <Flex
-        bg="highlight"
-        paddingY={"24px"}
-        paddingX={"32px"}
-        sx={{
-          flexDirection: ["column", "column", "row"],
-          borderRadius: "10px",
-        }}
-      >
-        {paramsToChoose.map((param) => (
-          <ParamSelectorItem
-            key={param.name}
-            param={param}
-            {...paramSelectorProps}
-          />
-        ))}
-      </Flex>
+      <Fragment>
+        <Flex
+          bg="highlight"
+          paddingY={"24px"}
+          paddingX={"32px"}
+          marginBottom="32px"
+          sx={{
+            flexDirection: ["column", "column", "row"],
+            borderRadius: "10px",
+          }}
+        >
+          {paramsToChoose.map((param) => (
+            <ParamSelectorItem
+              key={param.name}
+              param={param}
+              {...paramSelectorProps}
+            />
+          ))}
+        </Flex>
+        <Flex
+          sx={{
+            flexDirection: "column",
+            alignItems: ["center", "center", "start"],
+          }}
+        >
+          <span
+            sx={{
+              marginBottom: "8px",
+              color: "secondary",
+              fontSize: "14px",
+              textTransform: "uppercase",
+              fontWeight: "500",
+            }}
+          >
+            Preço do kit por semana
+          </span>
+
+          <span
+            sx={{
+              color: "#FF5C26",
+              fontSize: "34px",
+              textTransform: "uppercase",
+              fontWeight: "500",
+            }}
+          >
+            <span
+              sx={{
+                fontSize: "18px",
+                verticalAlign: "middle",
+              }}
+            >
+              R$
+            </span>
+            &nbsp; {Number(price).toLocaleString("pt-BR")}
+          </span>
+        </Flex>
+      </Fragment>
     )
   }
 
@@ -98,7 +139,7 @@ function SubscriptionPlans() {
       >
         <Box
           sx={{
-            flex: "1 30%",
+            flex: "1 40%",
             backgroundImage: "url('/images/bg1.jpg')",
             minHeight: ["260px", "260px", null],
             backgroundPosition: "center",
@@ -112,7 +153,7 @@ function SubscriptionPlans() {
           marginY={32}
           paddingX={"16px"}
           sx={{
-            flex: "1 70%",
+            flex: "1 60%",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
