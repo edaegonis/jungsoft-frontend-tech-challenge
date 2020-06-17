@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext ts --ext tsx --ext js",
-    "test": "jest"
+    "test": "jest",
+    "make-badges": "node_modules/.bin/jest-badges-readme"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
@@ -25,6 +26,7 @@
     "theme-ui": "^0.3.1"
   },
   "devDependencies": {
+    "@olavoparno/jest-badges-readme": "^1.4.1",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.2.1",
     "@testing-library/react-hooks": "^3.3.0",
@@ -45,6 +47,11 @@
     "collectCoverageFrom": [
       "components/**/*.{ts,tsx}",
       "!lib/*.{ts, tsx}"
+    ],
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
     ]
   }
 }
